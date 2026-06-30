@@ -9,7 +9,7 @@
 
 import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Volume2, VolumeX, Sun, Moon } from 'lucide-react';
+import { Terminal, Volume2, VolumeX, Sun, Moon, Trophy } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { Badge } from '@/components/ui/badge';
