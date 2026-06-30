@@ -291,6 +291,8 @@ export interface GameState {
   soundEnabled: boolean;
   /** Current UI theme mode */
   theme: 'light' | 'dark';
+  /** Player XP */
+  xp: number;
   /** Currently active chaos event overlay, or null */
   activeChaosEvent: ChaosEvent | null;
   /** History list of event IDs triggered this run */
@@ -457,6 +459,8 @@ export interface GameActions {
   toggleSound: () => void;
   /** Toggle between light and dark theme */
   toggleTheme: () => void;
+  /** Add XP points for completing stages */
+  addXp: (amount: number) => void;
   /** Resolve the active chaos event with selected choice */
   resolveChaosEvent: (choiceIndex: number) => void;
 

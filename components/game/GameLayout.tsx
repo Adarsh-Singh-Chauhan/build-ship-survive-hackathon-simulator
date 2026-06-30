@@ -11,7 +11,9 @@ import type { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Volume2, VolumeX, Sun, Moon } from 'lucide-react';
 import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
 import { Badge } from '@/components/ui/badge';
+import CinematicEffects from './CinematicEffects';
 import { useGameStore } from '@/store/gameStore';
 import GameTimer from './GameTimer';
 import TweetFeed from './TweetFeed';
@@ -48,8 +50,21 @@ export default function GameLayout({ children }: GameLayoutProps) {
   const toggleSound = useGameStore((s) => s.toggleSound);
   const theme = useGameStore((s) => s.theme);
   const toggleTheme = useGameStore((s) => s.toggleTheme);
+  const xp = useGameStore((s) => s.xp);
 
   const currentIndex = PHASES.findIndex((p) => p.key === phase);
+
+  // XP animation hook
+  const [showXpAnim, setShowXpAnim] = useState(false);
+  const prevXpRef = useRef(xp);
+
+  useEffect(() => {
+    if (xp > prevXpRef.current) {
+      setShowXpAnim(true);
+      setTimeout(() => setShowXpAnim(false), 2000);
+    }
+    prevXpRef.current = xp;
+  }, [xp]);
 
   return (
     <div 
@@ -144,6 +159,22 @@ export default function GameLayout({ children }: GameLayoutProps) {
 
         {/* Right — Timer & Volume */}
         <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 px-2 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold rounded relative">
+            <span className="opacity-80">XP:</span>
+            <span>{xp}</span>
+            <AnimatePresence>
+              {showXpAnim && (
+                <motion.span
+                  initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                  animate={{ opacity: 1, y: -20, scale: 1.2 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute left-1/2 -translate-x-1/2 text-amber-500 pointer-events-none"
+                >
+                  +25
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
           <button
             onClick={() => {
               toggleSound();
@@ -209,12 +240,43 @@ export default function GameLayout({ children }: GameLayoutProps) {
         )}
       </div>
 
-      {/* ── Bottom Status Bar ──────────────────────────────────────────── */}
-      <footer className="glass-card-strong relative z-20 flex items-center justify-between rounded-none border-x-0 border-b-0 px-4 py-1.5 sm:px-6">
-        <span className="text-xs text-muted-foreground">
-          Phase {currentIndex + 1} / {PHASES.length}
-        </span>
+      {/* ── Bottom Status Bar / Mobile Nav ──────────────────────────────────────────── */}
+      <footer className="glass-card-strong relative z-20 flex items-center justify-between rounded-none border-x-0 border-b-0 px-4 py-2 sm:py-1.5 sm:px-6 mt-auto bg-white/90 dark:bg-neutral-950/90 backdrop-blur-lg">
+        <div className="hidden sm:block text-xs text-muted-foreground font-mono">
+          PHASE {currentIndex + 1} / {PHASES.length}
+        </div>
+        
+        {/* Mobile Navigation */}
+        <div className="flex sm:hidden items-center justify-around w-full gap-2">
+          <Link 
+            href="/"
+            onClick={() => playMutedClick()}
+            className="flex flex-col items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 p-2 active:scale-95 transition-transform"
+          >
+            <Terminal className="w-5 h-5" />
+            <span className="text-[9px] font-bold uppercase tracking-wider">Lobby</span>
+          </Link>
+          <Link 
+            href="/achievements"
+            onClick={() => playMutedClick()}
+            className="flex flex-col items-center gap-1 text-neutral-500 hover:text-amber-500 p-2 active:scale-95 transition-transform"
+          >
+            <Trophy className="w-5 h-5" />
+            <span className="text-[9px] font-bold uppercase tracking-wider">Trophies</span>
+          </Link>
+          <button 
+            onClick={() => {
+              toggleTheme();
+              playMutedClick();
+            }}
+            className="flex flex-col items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 p-2 active:scale-95 transition-transform"
+          >
+            {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
+            <span className="text-[9px] font-bold uppercase tracking-wider">Theme</span>
+          </button>
+        </div>
       </footer>
+      <CinematicEffects effect={showXpAnim ? 'confetti-gold' : null} />
     </div>
   );
 }

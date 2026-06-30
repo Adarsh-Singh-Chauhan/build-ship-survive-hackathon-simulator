@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGameStore, STAGE_ORDER, isRoleRelevantForStage, checkTeammateGating } from "@/store/gameStore";
 import GameLayout from "@/components/game/GameLayout";
+import OnboardingFlow from "@/components/game/OnboardingFlow";
 import { Button } from "@/components/ui/button";
 import { PROBLEMS } from "@/data/problems";
 import { JUDGES } from "@/data/judges";
@@ -686,8 +687,10 @@ function DifficultyStage() {
   ] as const;
 
   return (
-    <GameplayStageCard
-      stageKey="difficulty"
+    <>
+      <OnboardingFlow onComplete={(data) => console.log("Onboarded with", data)} />
+      <GameplayStageCard
+        stageKey="difficulty"
       title="Choose Your Pace"
       subtitle="Decide how much time you want to budget for this hackathon. A shorter clock gives you less time to make decisions, but it increases your final score multiplier."
     >
@@ -716,6 +719,7 @@ function DifficultyStage() {
         ))}
       </div>
     </GameplayStageCard>
+    </>
   );
 }
 

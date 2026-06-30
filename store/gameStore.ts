@@ -1355,6 +1355,7 @@ const initialGameState = {
   unlockedAchievements: [] as string[],
   soundEnabled: true,
   theme: 'light' as 'light' | 'dark',
+  xp: 0,
   activeChaosEvent: null as ChaosEvent | null,
   chaosHistory: [] as string[],
   gameMode: 'classic' as 'classic' | 'daily' | 'speedrun' | 'chaos' | 'hardcore',
@@ -1449,6 +1450,10 @@ export const useGameStore = create<GameState & GameActions>()(
           const currentIndex = STAGE_ORDER.indexOf(stage);
           if (currentIndex < STAGE_ORDER.length - 1) {
             const next = STAGE_ORDER[currentIndex + 1];
+            
+            // Gamification: grant XP for advancing stages
+            get().addXp(25);
+
             
             // Chaos Event or Team Chat check at transition gates (after 'problemReveal', 'techStack', 'features', 'businessModel')
             const gates: GameStage[] = ['problemReveal', 'techStack', 'features', 'businessModel'];
@@ -2031,6 +2036,15 @@ export const useGameStore = create<GameState & GameActions>()(
             },
             false,
             'core/toggleTheme'
+          ),
+
+        addXp: (amount: number) =>
+          set(
+            (state) => ({
+              xp: (state.xp || 0) + amount,
+            }),
+            false,
+            'core/addXp'
           ),
 
         resolveChaosEvent: (choiceIndex) => {
@@ -3575,6 +3589,7 @@ export const useGameStore = create<GameState & GameActions>()(
           unlockedAchievements: state.unlockedAchievements,
           soundEnabled: state.soundEnabled,
           theme: state.theme,
+          xp: state.xp,
           activeChaosEvent: state.activeChaosEvent,
           chaosHistory: state.chaosHistory,
           gameMode: state.gameMode,
