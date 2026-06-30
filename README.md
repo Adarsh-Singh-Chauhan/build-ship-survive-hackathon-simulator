@@ -430,17 +430,6 @@ Please ensure all additions compile cleanly and include appropriate TypeScript i
 
 ---
 
-## Star History
-
-<a href="https://www.star-history.com/?repos=Adarsh-Singh-Chauhan%2Fbuild-ship-survive-hackathon-simulator&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator&type=date&legend=top-left" />
- </picture>
-</a>
-
----
 
 ## License
 
