@@ -21,7 +21,7 @@
 
 <br/>
 
-[**Play Now**](#getting-started) | [**Documentation**](#architecture) | [**Report Bug**](https://github.com/udaysharmadev/The-Hackathon-Simulator/issues) | [**Request Feature**](https://github.com/udaysharmadev/The-Hackathon-Simulator/issues)
+[**Play Now**](#getting-started) | [**Documentation**](#architecture) | [**Report Bug**](https://github.com/Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator/issues) | [**Request Feature**](https://github.com/Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator/issues)
 
 </div>
 
@@ -398,8 +398,8 @@ The-Hackathon-Simulator/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/udaysharmadev/The-Hackathon-Simulator.git
-   cd The-Hackathon-Simulator
+   git clone https://github.com/Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator.git
+   cd build-ship-survive-hackathon-simulator
    ```
 
 2. Install dependencies:
@@ -432,11 +432,11 @@ Please ensure all additions compile cleanly and include appropriate TypeScript i
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=udaysharmadev%2FThe-Hackathon-Simulator&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=Adarsh-Singh-Chauhan%2Fbuild-ship-survive-hackathon-simulator&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=udaysharmadev/The-Hackathon-Simulator&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=udaysharmadev/The-Hackathon-Simulator&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=udaysharmadev/The-Hackathon-Simulator&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Adarsh-Singh-Chauhan/build-ship-survive-hackathon-simulator&type=date&legend=top-left" />
  </picture>
 </a>
 
@@ -450,7 +450,9 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 <div align="center">
 
-### Built with care by the Hackathon Simulator Team
+<img src="https://github.com/Adarsh-Singh-Chauhan.png" width="100" height="100" style="border-radius: 50%" alt="Adarsh Singh" />
+
+### Built with care by Adarsh Singh
 
 **[Back to Top](#the-hackathon-simulator)**
 
