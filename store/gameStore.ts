@@ -3574,7 +3574,6 @@ export const useGameStore = create<GameState & GameActions>()(
             text,
             timestamp: getSimulatedTime(state.globalTimeRemaining, state.globalTotalTime),
             isRead: true,
-            type: 'info'
           };
           
           set(s => ({
@@ -3621,8 +3620,37 @@ export const useGameStore = create<GameState & GameActions>()(
                 playNotificationSound();
               }
             }
+            } else {
+              throw new Error('API Error');
+            }
           } catch (e) {
-            console.error('Chat AI failed', e);
+            console.error('Chat AI failed, falling back to mock response', e);
+            const state = get();
+            const teammate = state.team[Math.floor(Math.random() * state.team.length)] || state.team[0];
+            if (teammate) {
+              const mockResponses = [
+                "That sounds like a plan!",
+                "I'm on it.",
+                "Wait, are we sure about this?",
+                "Let's focus on the MVP.",
+                "Good point, let's keep moving."
+              ];
+              const responseMsg: TeamChatMessage = {
+                id: `msg-${Date.now() + 1}`,
+                senderId: teammate.id,
+                senderName: teammate.name,
+                senderAvatar: teammate.avatar,
+                text: mockResponses[Math.floor(Math.random() * mockResponses.length)],
+                timestamp: getSimulatedTime(state.globalTimeRemaining, state.globalTotalTime),
+                isRead: false,
+                type: 'contribution'
+              };
+              set(s => ({
+                teamChatMessages: [...s.teamChatMessages, responseMsg],
+                unreadChatCount: s.unreadChatCount + 1
+              }));
+              playNotificationSound();
+            }
           }
         },
       }),
