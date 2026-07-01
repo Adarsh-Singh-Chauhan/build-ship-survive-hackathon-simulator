@@ -234,7 +234,7 @@ export default function GameLayout({ children }: GameLayoutProps) {
 
         {/* Tweet Feed Sidebar - Hidden on mobile, fixed width on desktop */}
         {phase !== 'LOBBY' && phase !== 'RESULTS' && (
-          <aside className="hidden lg:block w-80 shrink-0">
+          <aside className="hidden lg:block shrink-0 h-full relative z-20">
             <TweetFeed />
           </aside>
         )}

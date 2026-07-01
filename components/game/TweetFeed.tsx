@@ -16,6 +16,7 @@ export default function TweetFeed() {
   
   const [tweetInput, setTweetInput] = useState('');
   const [isGettingNews, setIsGettingNews] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   
   // Calculate elapsed time in seconds
   const elapsedTime = totalTime > 0 ? (totalTime - timeRemaining) : 0;
@@ -88,20 +89,49 @@ export default function TweetFeed() {
     return null;
   }
 
+  if (isMinimized) {
+    return (
+      <div className="h-full flex flex-col items-center bg-white/40 backdrop-blur-md border-l border-neutral-200/50 p-2 overflow-hidden w-12 transition-all duration-300">
+        <button
+          onClick={() => { playSubtleHover(); setIsMinimized(false); }}
+          className="mt-2 p-2 hover:bg-white/60 rounded-lg transition-colors group relative"
+          title="Expand Tech Twitter"
+        >
+          <MessageSquare className="w-5 h-5 text-blue-500" />
+          {queue.length > 0 && (
+            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+          )}
+        </button>
+        <div className="mt-6 [writing-mode:vertical-lr] rotate-180 text-xs font-bold text-neutral-400 tracking-widest uppercase">
+          Tech Twitter
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full h-full flex flex-col bg-white/40 backdrop-blur-md border-l border-neutral-200/50 p-4 overflow-hidden rounded-xl md:rounded-none">
+    <div className="h-full flex flex-col bg-white/40 backdrop-blur-md border-l border-neutral-200/50 p-4 overflow-hidden rounded-xl md:rounded-none w-80 transition-all duration-300">
       <div className="flex items-center justify-between gap-2 mb-4 pb-2 border-b border-neutral-200">
         <div className="flex items-center gap-2">
           <MessageSquare className="w-5 h-5 text-blue-500" />
           <h3 className="font-bold text-neutral-800 tracking-tight">Tech Twitter</h3>
         </div>
-        <button
-          onClick={handleGetNews}
-          disabled={isGettingNews}
-          className="text-[10px] bg-blue-50 text-blue-600 font-bold px-2 py-1 rounded border border-blue-200 hover:bg-blue-100 disabled:opacity-50 uppercase"
-        >
-          {isGettingNews ? '...' : 'Get News Update'}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleGetNews}
+            disabled={isGettingNews}
+            className="text-[10px] bg-blue-50 text-blue-600 font-bold px-2 py-1 rounded border border-blue-200 hover:bg-blue-100 disabled:opacity-50 uppercase"
+          >
+            {isGettingNews ? '...' : 'News'}
+          </button>
+          <button
+            onClick={() => { playSubtleHover(); setIsMinimized(true); }}
+            className="text-neutral-400 hover:text-neutral-600 transition-colors p-1"
+            title="Minimize"
+          >
+            ▶
+          </button>
+        </div>
       </div>
       
       <div className="flex-1 overflow-y-auto no-scrollbar space-y-4">
