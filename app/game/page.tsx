@@ -5171,7 +5171,7 @@ function DevDebugPanel() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-6 xl:bottom-8 xl:right-6 max-xl:bottom-[calc(env(safe-area-inset-bottom,0px)+4.25rem)] max-xl:right-4 z-50 flex items-center gap-1.5 px-3 py-2 rounded-md bg-neutral-950 text-white border border-neutral-850 shadow-lg text-[10px] font-bold uppercase tracking-wider hover:bg-neutral-900 transition-all cursor-pointer font-mono"
+        className="fixed bottom-3 right-6 xl:bottom-3 xl:right-6 max-xl:bottom-[calc(env(safe-area-inset-bottom,0px)+3rem)] max-xl:right-4 z-50 flex items-center gap-1.5 px-3 py-2 rounded-md bg-neutral-950 text-white border border-neutral-850 shadow-lg text-[10px] font-bold uppercase tracking-wider hover:bg-neutral-900 transition-all cursor-pointer font-mono"
       >
         🛠️ TIME MACHINE & STATS
       </button>
@@ -5179,7 +5179,7 @@ function DevDebugPanel() {
   }
 
   return (
-    <div className="fixed bottom-8 right-6 xl:bottom-8 xl:right-6 max-xl:bottom-[calc(env(safe-area-inset-bottom,0px)+4.25rem)] max-xl:right-4 z-50 w-72 max-sm:w-[calc(100vw-2rem)] max-sm:max-w-[280px] bg-card border border-neutral-400 rounded-lg shadow-xl p-4 font-mono text-xs">
+    <div className="fixed bottom-3 right-6 xl:bottom-3 xl:right-6 max-xl:bottom-[calc(env(safe-area-inset-bottom,0px)+3rem)] max-xl:right-4 z-50 w-72 max-sm:w-[calc(100vw-2rem)] max-sm:max-w-[280px] bg-card border border-neutral-400 rounded-lg shadow-xl p-4 font-mono text-xs">
       <div className="flex items-center justify-between border-b border-border pb-2 mb-2 font-bold text-neutral-900">
         <span>🛠️ TIME PORTAL & STATS</span>
         <button onClick={() => setIsOpen(false)} className="hover:text-red-500 font-bold cursor-pointer">[X]</button>
