@@ -375,12 +375,12 @@ export function checkTeammateGating(teammate: Teammate, state: GameState): { isG
     if (hasBackend || hasDb || hasHosting || hasThreeTech) {
       return { isGated: false, reason: "Ready to review architecture" };
     }
-    return { isGated: true, reason: "Watching architecture." };
+    return { isGated: true, reason: "Working on architecture." };
   } else if (cat === 'designer' || cat === 'frontend') {
     if (hasUsp || numFeatures >= 3 || hasPitch) {
       return { isGated: false, reason: "Ready to review product design" };
     }
-    return { isGated: true, reason: "Watching product decisions." };
+    return { isGated: true, reason: "Working on product decisions." };
   } else if (cat === 'pitch') {
     if (hasUsp || pitchCount >= 3) {
       return { isGated: false, reason: "Ready to review pitch deck" };
@@ -390,24 +390,24 @@ export function checkTeammateGating(teammate: Teammate, state: GameState): { isG
     if (hasUsp || !!state.businessModel) {
       return { isGated: false, reason: "Ready to review business model" };
     }
-    return { isGated: true, reason: "Watching business model." };
+    return { isGated: true, reason: "Working on business model." };
   } else if (cat === 'ai') {
     const hasAiTech = techStack.some(t => t.category === 'AI / ML' || t.category === 'ai');
     const hasAiSol = state.solutionDirection === 'ai-solution';
     if (hasAiTech || hasAiSol) {
       return { isGated: false, reason: "Ready to review AI features" };
     }
-    return { isGated: true, reason: "Watching AI direction." };
+    return { isGated: true, reason: "Working on AI direction." };
   } else if (cat === 'researcher') {
     if (state.selectedProblem) {
       return { isGated: false, reason: "Ready to review project" };
     }
-    return { isGated: true, reason: "Watching project selection." };
+    return { isGated: true, reason: "Working on project selection." };
   } else {
     if (state.selectedProblem) {
       return { isGated: false, reason: "Ready to review project" };
     }
-    return { isGated: true, reason: "Watching project details." };
+    return { isGated: true, reason: "Working on project details." };
   }
 }
 

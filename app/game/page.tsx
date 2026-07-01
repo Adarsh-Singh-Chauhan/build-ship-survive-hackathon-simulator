@@ -5860,7 +5860,7 @@ function PersistentTeamPanel({
                       <div className="flex items-center justify-between border-t border-neutral-150 pt-2">
                         {!t.helpTokenUsed ? (
                           gating.isGated ? (
-                            <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider font-mono">{getSubtleGatingStatus?.(t) || "Watching..."}</span>
+                            <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider font-mono">{getSubtleGatingStatus?.(t) || "Working..."}</span>
                           ) : (
                             <Button
                               size="xs"
@@ -6205,7 +6205,7 @@ function PersistentTeamPanel({
 // ─── Persistent Team Panel helper forward ref ────────────────────────────────
 function getSubtleGatingStatus(teammate: any) {
   // This is a module-level stub; the real impl is defined inside GamePage
-  return "Watching...";
+  return "Working...";
 }
 
 function TeammateAdviceNotification() {
@@ -6375,24 +6375,24 @@ export default function GamePage() {
   const getSubtleGatingStatus = (teammate: Teammate) => {
     const role = (teammate.role || "").toLowerCase();
     if (role.includes("backend") || role.includes("database") || role.includes("developer") || role.includes("full stack") || role.includes("fullstack") || role.startsWith("dev")) {
-      return "Watching architecture.";
+      return "Working on architecture.";
     }
     if (role.includes("designer") || role.includes("ux") || role.includes("ui ") || role.includes("product design") || role.includes("frontend") || role.includes("front-end")) {
-      return "Watching product decisions.";
+      return "Working on product decisions.";
     }
     if (role.includes("strategist") || role.includes("founder") || role.includes("business") || role.includes("co-founder") || role.includes("analyst")) {
-      return "Watching business model.";
+      return "Working on business model.";
     }
     if ((role.includes("ai") && !role.includes("assistant")) || role.includes("ml") || role.includes("machine learning") || role.includes("data scientist")) {
-      return "Watching AI direction.";
+      return "Working on AI direction.";
     }
     if (role.includes("researcher") || role.includes("research")) {
-      return "Watching project selection.";
+      return "Working on project selection.";
     }
     if (role.includes("pitch") || role.includes("marketing") || role.includes("sales")) {
-      return "Watching pitch deck.";
+      return "Working on pitch deck.";
     }
-    return "Watching project details.";
+    return "Working on project details.";
   };
 
   useEffect(() => {
