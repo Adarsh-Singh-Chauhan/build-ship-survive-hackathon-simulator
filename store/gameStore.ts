@@ -3619,7 +3619,6 @@ export const useGameStore = create<GameState & GameActions>()(
                 }));
                 playNotificationSound();
               }
-            }
             } else {
               throw new Error('API Error');
             }
