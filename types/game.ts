@@ -475,6 +475,7 @@ export interface GameActions {
   triggerTeamChatMessage: (event: string, payload?: any) => void;
   updateTeammateContext: () => void;
   triggerCrewVote: (voteType: 'usp' | 'businessModel', targetId?: string, voteAs?: 'primary' | 'secondary') => void;
+  sendTeamChatMessage: (text: string) => Promise<void>;
 }
 
 export interface TeamChatMessage {

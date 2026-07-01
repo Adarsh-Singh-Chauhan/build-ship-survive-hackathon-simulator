@@ -5612,6 +5612,9 @@ function PersistentTeamPanel({
   const [selectedUspToVote, setSelectedUspToVote] = useState<string>('');
   const [voteRole, setVoteRole] = useState<'primary' | 'secondary'>('primary');
   const [selectedModelToVote, setSelectedModelToVote] = useState<string>('');
+  const [chatInput, setChatInput] = useState('');
+  const [isSendingChat, setIsSendingChat] = useState(false);
+  const { sendTeamChatMessage } = useGameStore();
 
   const getRoleCategory = (role: string): string => {
     const r = role.toLowerCase();
@@ -6180,6 +6183,35 @@ function PersistentTeamPanel({
                     )}
                   </div>
                 )}
+
+                {/* Chat Input Section */}
+                <div className="p-2 border-t border-neutral-200 mt-2 bg-neutral-50 rounded-md">
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    if (!chatInput.trim() || isSendingChat) return;
+                    setIsSendingChat(true);
+                    const msg = chatInput;
+                    setChatInput('');
+                    await sendTeamChatMessage(msg);
+                    setIsSendingChat(false);
+                  }} className="flex gap-1.5">
+                    <input
+                      type="text"
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      placeholder="Chat with crew..."
+                      className="flex-1 font-sans text-[11px] bg-white border border-neutral-300 rounded px-2 py-1.5 focus:outline-none focus:border-neutral-500"
+                      disabled={isSendingChat}
+                    />
+                    <button
+                      type="submit"
+                      disabled={!chatInput.trim() || isSendingChat}
+                      className="bg-neutral-900 text-white rounded px-3 text-[10px] font-bold cursor-pointer disabled:opacity-50"
+                    >
+                      {isSendingChat ? '...' : 'SEND'}
+                    </button>
+                  </form>
+                </div>
 
                 {/* Auto-scroll anchor */}
                 <div ref={chatEndRef} />

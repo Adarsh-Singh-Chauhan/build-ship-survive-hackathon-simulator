@@ -3562,6 +3562,69 @@ export const useGameStore = create<GameState & GameActions>()(
 
           playNotificationSound();
         },
+
+        sendTeamChatMessage: async (text: string) => {
+          const state = get();
+          
+          const userMsg: TeamChatMessage = {
+            id: `msg-${Date.now()}`,
+            senderId: 'player',
+            senderName: state.playerName || 'You',
+            senderAvatar: state.playerAvatar || '👨‍💻',
+            text,
+            timestamp: getSimulatedTime(state.globalTimeRemaining, state.globalTotalTime),
+            isRead: true,
+            type: 'info'
+          };
+          
+          set(s => ({
+            teamChatMessages: [...s.teamChatMessages, userMsg],
+            unreadChatCount: 0
+          }));
+          
+          try {
+            const projectContext = buildProjectContext(state);
+            const teamContext = state.team.map(t => `${t.id} - ${t.name} (${t.role}): ${t.personality}`).join('\\n');
+            const chatHistory = state.teamChatMessages.map(m => `${m.senderName}: ${m.text}`).join('\\n');
+            
+            const res = await fetch('/api/team-chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                message: text,
+                projectContext,
+                teamContext,
+                chatHistory: chatHistory.slice(-2000)
+              })
+            });
+            
+            if (res.ok) {
+              const data = await res.json();
+              const teammate = state.team.find(t => t.id === data.teammateId) || state.team[0];
+              
+              if (teammate) {
+                const responseMsg: TeamChatMessage = {
+                  id: `msg-${Date.now() + 1}`,
+                  senderId: teammate.id,
+                  senderName: teammate.name,
+                  senderAvatar: teammate.avatar,
+                  text: data.text,
+                  timestamp: getSimulatedTime(state.globalTimeRemaining, state.globalTotalTime),
+                  isRead: false,
+                  type: data.type || 'info'
+                };
+                
+                set(s => ({
+                  teamChatMessages: [...s.teamChatMessages, responseMsg],
+                  unreadChatCount: s.unreadChatCount + 1
+                }));
+                playNotificationSound();
+              }
+            }
+          } catch (e) {
+            console.error('Chat AI failed', e);
+          }
+        },
       }),
       {
         name: 'hackathon-simulator-sprint2-persist',
