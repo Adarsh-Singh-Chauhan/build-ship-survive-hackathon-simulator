@@ -14,7 +14,7 @@ export default function TweetFeed() {
   const phase = useGameStore((s) => s.phase);
   
   // Calculate elapsed time in seconds
-  const elapsedTime = totalTime > 0 ? (totalTime - timeRemaining) / 1000 : 0;
+  const elapsedTime = totalTime > 0 ? (totalTime - timeRemaining) : 0;
 
   useEffect(() => {
     // Initialize queue when entering a gameplay phase
