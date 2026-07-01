@@ -32,8 +32,7 @@ export default function TweetFeed() {
       avatar: '👨‍💻',
       likes: Math.floor(Math.random() * 15),
       retweets: 0,
-      timeOffset: 0,
-      phase: phase
+      timeOffset: 0
     });
     setTweetInput('');
   };
@@ -48,8 +47,7 @@ export default function TweetFeed() {
       avatar: '🤖',
       likes: 0,
       retweets: 0,
-      timeOffset: 0,
-      phase: phase
+      timeOffset: 0
     });
     setTimeout(() => {
       addTweet({
@@ -60,8 +58,7 @@ export default function TweetFeed() {
         avatar: '🤖',
         likes: Math.floor(Math.random() * 50) + 10,
         retweets: Math.floor(Math.random() * 5),
-        timeOffset: 0,
-        phase: phase
+        timeOffset: 0
       });
       setIsGettingNews(false);
     }, 1500);
