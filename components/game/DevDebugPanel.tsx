@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useGameStore, STAGE_ORDER } from '@/store/gameStore';
-import type { GameStage } from '@/store/gameStore';
+import type { GameStage } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { playMutedClick } from '@/lib/sound';
 
