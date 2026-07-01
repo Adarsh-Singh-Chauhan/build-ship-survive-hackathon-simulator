@@ -17,6 +17,7 @@ import CinematicEffects from './CinematicEffects';
 import { useGameStore } from '@/store/gameStore';
 import GameTimer from './GameTimer';
 import TweetFeed from './TweetFeed';
+import DevDebugPanel from './DevDebugPanel';
 import type { GamePhase } from '@/types/game';
 import { playMutedClick } from '@/lib/sound';
 
@@ -242,8 +243,9 @@ export default function GameLayout({ children }: GameLayoutProps) {
 
       {/* ── Bottom Status Bar / Mobile Nav ──────────────────────────────────────────── */}
       <footer className="glass-card-strong relative z-20 flex items-center justify-between rounded-none border-x-0 border-b-0 px-4 py-2 sm:py-1.5 sm:px-6 mt-auto bg-white/90 dark:bg-neutral-950/90 backdrop-blur-lg">
-        <div className="hidden sm:block text-xs text-muted-foreground font-mono">
-          PHASE {currentIndex + 1} / {PHASES.length}
+        <div className="hidden sm:flex items-center text-xs text-muted-foreground font-mono relative gap-4">
+          <span>PHASE {currentIndex + 1} / {PHASES.length}</span>
+          <DevDebugPanel />
         </div>
         
         {/* Mobile Navigation */}
@@ -274,6 +276,10 @@ export default function GameLayout({ children }: GameLayoutProps) {
             {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
             <span className="text-[9px] font-bold uppercase tracking-wider">Theme</span>
           </button>
+          
+          <div className="sm:hidden ml-auto">
+            <DevDebugPanel />
+          </div>
         </div>
       </footer>
       <CinematicEffects effect={showXpAnim ? 'confetti-gold' : null} />
